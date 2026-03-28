@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+# example URL：[Quickstart - Docs by LangChain](https://docs.langchain.com/oss/python/langchain/quickstart)
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from langchain.tools import tool, ToolRuntime
