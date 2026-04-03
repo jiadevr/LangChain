@@ -1,5 +1,5 @@
 #[Structured output - Docs by LangChain](https://docs.langchain.com/oss/python/langchain/structured-output)
-#这段代码有问题烧token非常多，问题待确定
+#这段代码有问题烧token非常多，问题待确定;
 from langchain_openai import ChatOpenAI
 import os
 from pydantic import BaseModel, Field
@@ -19,6 +19,7 @@ class EventDetails(BaseModel):
     event_name: str = Field(description="Name of the event")
     date: str = Field(description="Event date")
 
+# MiMO模型似乎跑不出来这段，疑似JSON输出有问题
 chat_llm = ChatOpenAI(
     api_key=os.getenv("DASHSCOPE_API_KEY"),
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
