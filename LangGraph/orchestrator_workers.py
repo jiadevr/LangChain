@@ -11,12 +11,15 @@ from langgraph.types import Send
 
 # 报告结构化输出
 class Section(TypedDict):
-    name: Annotated[str, ..., "章节名称"]
+    id: Annotated[int, ..., "章节ID"]
+    title: Annotated[str, ..., "章节名称"]
     description: Annotated[str, ..., "本章内容概括"]
 
 
 class ReportPlan(TypedDict):
-    sections: Annotated[list[Section], ..., "每一章信息组成的数组"]
+    topic: Annotated[str, ..., "报告主题"]
+    report_title: Annotated[str, ..., "报告标题"]
+    chapters: Annotated[list[Section], ..., "每一章信息组成的数组"]
 
 
 # 报告状态
@@ -51,22 +54,30 @@ def orchestrator(state: ReportState):
     """
     调用LLM根据用户提供的话题生成章节标题和描述
     """
+    # OpenAI要求使用结构化输出必须显式标注输出为Json格式
     report_sections = planner.invoke(
         [
             SystemMessage(
-                content="你是一个报告生成助手，请根据用户提供的话题生成报告框架，章节数量不超过5个，每章的描述不超过100字"
+                content="你是一个报告生成助手，请根据用户提供的话题生成报告框架，章节数量不超过5个，每章的描述不超过100字,请始终以 JSON 格式回复。确保你的回复是有效的 JSON 对象。"
             ),
             HumanMessage(content=f"话题为： {state['topic']}"),
         ]
     )
-
-    return {"sections": report_sections["sections"]}
+    print("__________report_sections__________")
+    print(report_sections)
+    # 将 chapters 转换为 sections 格式
+    sections = [
+        {"name": ch["title"], "description": ch["description"]}
+        for ch in report_sections["chapters"]
+    ]
+    return {"sections": sections}
 
 
 def workers(state: WorkerState):
     """
     批量调用根据section和描述撰写具体内容
     """
+    print(f"receive work {state['section']['name']}, description: {state['section']['description']}")
     section = chat_llm.invoke(
         [
             SystemMessage(

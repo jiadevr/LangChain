@@ -18,6 +18,15 @@ chatLLM = ChatOpenAI(
     model="qwen-plus",
     temperature=0.7,
 )
+
+# 小米mimo-v2-pro
+# chatLLM = ChatOpenAI(
+#     api_key=os.getenv("MIMO_API_KEY"),
+#     base_url="https://api.xiaomimimo.com/v1",
+#     model="mimo-v2-pro",
+#     temperature=0.7,
+# )
+
 agent = create_agent(
     model=chatLLM,
     tools=[

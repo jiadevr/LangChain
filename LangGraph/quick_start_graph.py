@@ -28,6 +28,13 @@ chat_llm = ChatOpenAI(
     max_completion_tokens=1000,
 )
 
+# chatLLM = ChatOpenAI(
+#     api_key=os.getenv("MIMO_API_KEY"),
+#     base_url="https://api.xiaomimimo.com/v1",
+#     model="mimo-v2-pro",#"mimo-v2-omni"
+#     temperature=0.7,
+# )
+
 
 @tool
 def multiply(a: int, b: int) -> int:
@@ -188,3 +195,5 @@ for m in messages["messages"]:
 
 # 138
 # ================================== Ai Message ==================================
+
+# 小米MinoV2-omni和pro都能正确回答

@@ -1,5 +1,5 @@
 #[Structured output - Docs by LangChain](https://docs.langchain.com/oss/python/langchain/structured-output)
-#直接跑通没有修改
+#这段代码有问题烧token非常多，问题待确定
 from langchain_openai import ChatOpenAI
 import os
 from pydantic import BaseModel, Field
@@ -50,7 +50,7 @@ agent = create_agent(
 result = agent.invoke({
     "messages": [{"role": "user", "content": "Extract info: John Doe (john@email.com) is organizing Tech Conference on March 15th"}]
 })
-
+print(result)
 for msg in result['messages']:
     # If message is actually a ToolMessage object (not a dict), check its class name
     if type(msg).__name__ == "ToolMessage":
