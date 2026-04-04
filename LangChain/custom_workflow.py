@@ -23,6 +23,8 @@ embedding_model = OpenAIEmbeddings(
     model="text-embedding-v3",
     # 如果API要求Str明文必须关闭这项，否则报格式错
     check_embedding_ctx_length=False,
+    # Qwen的Embedding批次大小为10，单批次最大Token数量为8192
+    chunk_size=10
 )
 
 vector_store = InMemoryVectorStore(embedding=embedding_model)
