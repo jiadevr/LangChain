@@ -1,10 +1,12 @@
 # LangChain & LangGraph
-官方文档案例的本地化改造，使用OpenAIModelClass对接百炼平台/小米MiMo实现。
+官方文档案例的本地化改造，使用OpenAIModelClass对接百炼平台/小米MiMo/Ollama实现。
 解决文档中对于国内模型没有直接案例的问题，复现了[LangChain官网](https://docs.langchain.com/oss/python/langchain/overview)的重点示例
 ## 模型
 - 语言模型需要支持工具调用，案例中LangChain部分主要使用qwen-plus，部分使用qwen_max。qwen-plus免费额度足以完成LangChain部分;
     - 小米MiMo在实名认证后提供了5元免费调用额度，调用一次约0.01元，数学运算理解能力强于qwen-plus,但在结构化输出中有问题，对属性名称要求强、输出Json疑似进入检查死循环
 - Embedding模型使用qwen的text-embedding-v3
+    - Ollama本地使用qwen3-embedding:8b  
+
 ## LangChain部分
 按照官网文档顺序排序如下
 - helloworld.py - 简单的天气查询Agent，对应[Quickstart](https://docs.langchain.com/oss/python/langchain/quickstart)

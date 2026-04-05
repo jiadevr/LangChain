@@ -24,8 +24,21 @@ embedding_model = OpenAIEmbeddings(
     # 如果API要求Str明文必须关闭这项，否则报格式错
     check_embedding_ctx_length=False,
     # Qwen的Embedding批次大小为10，单批次最大Token数量为8192
-    chunk_size=10
+    chunk_size=10,
 )
+
+# Ollama本地Qwen3-embedding:8b
+# embedding_model = OpenAIEmbeddings(
+#     api_key="",
+#     base_url="http://localhost:11434/v1",
+#     model="qwen3-embedding:8b",
+#     dimensions=1024,
+#     # 如果API要求Str明文必须关闭这项，否则报格式错
+#     check_embedding_ctx_length=False,
+#     # Qwen的Embedding批次大小为10，单批次最大Token数量为8192
+#     chunk_size=10
+# )
+
 
 vector_store = InMemoryVectorStore(embedding=embedding_model)
 documents = [
@@ -62,6 +75,16 @@ chat_llm = ChatOpenAI(
     timeout=200,
     max_completion_tokens=1000,
 )
+
+
+# #Ollama本地Gemma
+# chat_llm = ChatOpenAI(
+#     name="ollama-ai",
+#     model="gemma4",
+#     base_url="http://localhost:11434/v1",
+#     api_key="",
+#     temperature=0.7,
+# )
 
 agent = create_agent(
     model=chat_llm,

@@ -27,6 +27,15 @@ chatLLM = ChatOpenAI(
 #     temperature=0.7,
 # )
 
+# Ollama本地Gemma
+# chatLLM = ChatOpenAI(
+#     name="ollama-ai",
+#     model="gemma4",
+#     base_url="http://localhost:11434/v1",
+#     api_key="",
+#     temperature=0.7,
+# )
+
 agent = create_agent(
     model=chatLLM,
     tools=[
