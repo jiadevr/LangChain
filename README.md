@@ -4,6 +4,7 @@
 ## 模型
 - 语言模型需要支持工具调用，案例中LangChain部分主要使用qwen-plus，部分使用qwen_max。qwen-plus免费额度足以完成LangChain部分;
     - 小米MiMo在实名认证后提供了5元免费调用额度，调用一次约0.01元，数学运算理解能力强于qwen-plus,但在结构化输出中有问题，对属性名称要求强、输出Json疑似进入检查死循环
+    - Ollama本地使用谷歌的Gemma4:e4b`ollama run gemma4:e4b`,实测和qwen-flash在结构化输出方面各有胜负
 - Embedding模型使用qwen的text-embedding-v3
     - Ollama本地使用qwen3-embedding:8b  
 
